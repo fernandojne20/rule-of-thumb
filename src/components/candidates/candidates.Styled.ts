@@ -12,4 +12,5 @@ export const CandidatesContent = styled.section`
   max-width: 1280px;
   display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
 `
