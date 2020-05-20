@@ -11,7 +11,10 @@ export const HeaderContainer = styled.header`
   padding: 0 135px;
   justify-content: space-between;
   color: #fff;
-  position:sticky;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 9999;
 `;
 
 export const Logo = styled.span`
