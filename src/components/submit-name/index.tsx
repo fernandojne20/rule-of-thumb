@@ -5,7 +5,6 @@ import {
   SubmitButton, 
   SubmitNameContent
 } from './submit-name.Styled';
-import closeIcon from '../../assets/close.svg';
 
 export const SubmitName: FunctionComponent = () => {
   return (
