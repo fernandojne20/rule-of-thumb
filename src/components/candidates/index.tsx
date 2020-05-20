@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { CandidatesContainer, CandidatesContent } from './candidates.Styled';
-import { Message } from '../message'
+import { Message } from '../message';
+import { Voting } from '../voting';
 
 export const Candidates: FunctionComponent = () => {
   return (
@@ -8,7 +9,7 @@ export const Candidates: FunctionComponent = () => {
       <CandidatesContainer>
         <CandidatesContent>
           <Message/>
-          Candidates
+          <Voting/>
         </CandidatesContent>
       </CandidatesContainer>
     </>
