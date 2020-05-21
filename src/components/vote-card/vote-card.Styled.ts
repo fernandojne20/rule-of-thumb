@@ -4,7 +4,7 @@ export const CardContainer = styled.div<{cardImage: string}>`
   display: flex;
   max-width: 30.62em;
   min-height: 34.37em; 
-  /* width: 100%; */
+  width: 100%;
   background-image: url(${({cardImage}) => cardImage});
   margin-bottom: 40px;
   background-repeat: no-repeat;
@@ -14,6 +14,7 @@ export const CardContainer = styled.div<{cardImage: string}>`
 
 export const VoteCardContainer = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;

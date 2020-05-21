@@ -6,6 +6,7 @@ export type GlobalState = {
 
 export const initialState: GlobalState = {
   voting: {
-    candidates: []
+    candidates: [],
+    votedCandidates: []
   }
 }

@@ -8,10 +8,11 @@ import { Candidate, VoteType } from '../../domains/voting/entities';
 
 interface VotingProps {
   candidates: Candidate[];
+  votedCandidates: Array<number>;
   getCandidates: () => void;
   makeVote: (id: number, voteType: VoteType) => void;
 }
-export const Voting: FunctionComponent<VotingProps> = ({candidates, getCandidates, makeVote}) => {
+export const Voting: FunctionComponent<VotingProps> = ({candidates, votedCandidates, getCandidates, makeVote}) => {
 
   useEffect(() => {
     getCandidates();
@@ -25,6 +26,7 @@ export const Voting: FunctionComponent<VotingProps> = ({candidates, getCandidate
             <VoteCard 
               candidate={candidate} 
               key={candidate.id}
+              voted={votedCandidates.indexOf(candidate.id) >= 0}
               onVote={(id, voteType) => makeVote(id, voteType)}
             />
           )
@@ -37,7 +39,8 @@ export const Voting: FunctionComponent<VotingProps> = ({candidates, getCandidate
 export default connect(
   ({voting}: GlobalState) => {
     return {
-      candidates: voting.candidates
+      candidates: voting.candidates,
+      votedCandidates: voting.votedCandidates
     }
   },
   (dispatch) => {

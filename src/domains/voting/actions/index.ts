@@ -25,6 +25,7 @@ export interface MakeVoteAction extends Action {
 
 export interface VoteMadeAction extends Action {
   type: VOTING_ACTIONS.VOTE_MADE;
+  id: number;
 }
 
 export type VotingActions = 
