@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import thumbUp from '../../assets/thumb-up.svg';
 import thumbDown from '../../assets/thumb-down.svg';
 import {
@@ -23,6 +23,7 @@ interface VoteCardProps {
   candidate: Candidate,
   voted: boolean,
   onVote: (id: number, voteType: VoteType) => void,
+  onVoteAgain: (id:number) => void,
 }
 
 const calculatePercentage = (total: number, portion: number): number => {
@@ -33,7 +34,7 @@ const thumbRule = (upVotes: number, downVotes: number): VoteType => {
   return (upVotes >= downVotes ? VoteType.UP: VoteType.DOWN);
 }
 
-export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, onVote}) => {
+export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, onVote, onVoteAgain}) => {
 
   const upPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.upVotes);
   const downPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.downVotes);
@@ -41,6 +42,13 @@ export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, on
   const [downVotePercentage] = useState<number>(downPercentage);
   const [voteType, setVoteType] = useState<VoteType | undefined>(undefined);
 
+  useEffect(() => {
+    if(!voted) {
+      setVoteType(undefined);
+    }
+    
+  }, [voted])
+  
   return (
     <CardContainer cardImage={candidate.image}>
       <VoteCardContainer>
@@ -83,7 +91,8 @@ export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, on
           </VoteActions>
           :
           <VoteActions>
-            <VoteButton>
+            <VoteButton
+              onClick={() => onVoteAgain(candidate.id)}>
               Vote again
             </VoteButton>
           </VoteActions>

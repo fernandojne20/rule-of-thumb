@@ -6,6 +6,7 @@ export enum VOTING_ACTIONS {
   SET_CANDIDATES = 'SET_CANDIDATES',
   MAKE_VOTE = 'MAKE_VOTE',
   VOTE_MADE = 'VOTE_MADE',
+  ALLOW_VOTE_AGAIN = 'ALLOW_VOTE_AGAIN',
 }
 
 export interface GetCandidatesAction extends Action {
@@ -28,8 +29,14 @@ export interface VoteMadeAction extends Action {
   id: number;
 }
 
+export interface AllowVoteAgainAction extends Action {
+  type: VOTING_ACTIONS.ALLOW_VOTE_AGAIN;
+  id: number;
+}
+
 export type VotingActions = 
   | GetCandidatesAction
   | SetCandidatesAction
   | MakeVoteAction
-  | VoteMadeAction;
+  | VoteMadeAction
+  | AllowVoteAgainAction;

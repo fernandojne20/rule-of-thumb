@@ -18,6 +18,11 @@ function reducer(state = initialState, action: VotingActions): VotingState {
         ...state, 
         votedCandidates: addToArray<number>(state.votedCandidates, action.id)
       }
+    case VOTING_ACTIONS.ALLOW_VOTE_AGAIN: 
+      return {
+        ...state,
+        votedCandidates: removeFromArray<number>(state.votedCandidates, action.id)
+      }
     default:
       return state;
   }
@@ -26,6 +31,11 @@ function reducer(state = initialState, action: VotingActions): VotingState {
 const addToArray = <T>(array: Array<T>, value: T) => {
   
   return array.indexOf(value) < 0 ? [...array, value] : array;
+}
+
+const removeFromArray = <T>(array: Array<T>, toRemove: T) => {
+  
+  return array.filter((value) => value !== toRemove );
 }
 
 export default reducer;
