@@ -5,7 +5,7 @@ import {successGetCandidates, successMakeVote} from '../infrastructure/http-clie
 import { Candidate, MakeVoteDTO } from '../domains/voting/entities';
 import { StatusResponse } from '../infrastructure/http-client/entities';
 
-const getCandidates = Voting.getCandidates(successGetCandidates);
+const getCandidates = Voting.getCandidates(Voting.getCandidatesAccesor());
 export function* votingSaga() {
 
   yield all([
@@ -23,7 +23,7 @@ function* makeVoteSaga(args: MakeVoteAction) {
 
   const {id, voteType}: MakeVoteDTO = args;
 
-  const makeVote = Voting.makeVote(successMakeVote);
+  const makeVote = Voting.makeVote(Voting.makeVoteAccessor());
 
   const response: StatusResponse = yield call(makeVote, {id, voteType});
 

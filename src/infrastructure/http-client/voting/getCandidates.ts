@@ -5,7 +5,7 @@ export type Accessor = () => Promise<Candidate[]>;
 
 export const getCandidatesAccesor: () => Accessor = () => async () => {
 
-  const url = `https://jsonplaceholder.typicode.com/users`;
+  const url = `${process.env.REACT_APP_BACKEND_URL}/candidates`;
   const { data } = await axios.get(url);
   return data;
 

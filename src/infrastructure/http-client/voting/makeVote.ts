@@ -6,8 +6,8 @@ export type Accessor = (makeVote: MakeVoteDTO) => Promise<number>;
 
 export const makeVoteAccessor: () => Accessor = () => async (makeVote) => {
 
-  const url = ``;
-  const { status } = await axios.post(url, makeVote);
+  const url = `${process.env.REACT_APP_BACKEND_URL}/vote/${makeVote.id}`;
+  const { status } = await axios.put(url, makeVote);
 
   return status;
 }
