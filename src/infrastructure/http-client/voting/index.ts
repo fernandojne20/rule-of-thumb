@@ -1,0 +1,1 @@
+export { getCandidates, getCandidatesAccesor} from './getCandidates';

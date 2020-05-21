@@ -1,11 +1,8 @@
-import { all, takeLatest } from 'redux-saga/effects';
-import { VOTING_ACTIONS } from '../domains/voting/actions';
+import { all, fork } from 'redux-saga/effects';
+import { votingSaga } from './VotingSaga';
 
-function* initialMessage() {
-  yield console.log('Initial Saga');
-}
 export function* rootSaga() {
   yield all([
-    takeLatest(VOTING_ACTIONS.GET_CANDIDATES, initialMessage),
+    fork(votingSaga),
   ]);
 }
