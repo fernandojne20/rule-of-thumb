@@ -38,8 +38,8 @@ export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, on
 
   const upPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.upVotes);
   const downPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.downVotes);
-  const [upVotePercentage] = useState<number>(upPercentage);
-  const [downVotePercentage] = useState<number>(downPercentage);
+  const [upVotePercentage, setUpVotePercentage] = useState<number>(upPercentage);
+  const [downVotePercentage, setDownVotePercentage] = useState<number>(downPercentage);
   const [voteType, setVoteType] = useState<VoteType | undefined>(undefined);
 
   useEffect(() => {
@@ -48,6 +48,12 @@ export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate, voted, on
     }
     
   }, [voted])
+
+  useEffect(() => {
+    setUpVotePercentage(calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.upVotes));
+    setDownVotePercentage(calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.downVotes));
+    
+  }, [candidate.upVotes, candidate.downVotes])
   
   return (
     <CardContainer cardImage={candidate.image}>
