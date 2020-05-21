@@ -5,11 +5,16 @@ import thumbDown from '../../../assets/thumb-down.svg';
 import { VoteType } from '../../../domains/voting/entities';
 
 interface ThumbButtonProps {
-  type: VoteType
+  type: VoteType,
+  selected?: boolean,
+  onClick?: (voteType: VoteType) => void,
 }
-export const ThumbButton: FunctionComponent<ThumbButtonProps> = ({type}) => {
+export const ThumbButton: FunctionComponent<ThumbButtonProps> = ({type, selected, onClick}) => {
   return (
-    <ThumbButtonContainer type={type}>
+    <ThumbButtonContainer 
+      selected={selected || false}
+      type={type} 
+      onClick={() => onClick && onClick(type)}>
       {
         type === VoteType.UP ? 
         <ThumbIcon src={thumbUp}/> : 
