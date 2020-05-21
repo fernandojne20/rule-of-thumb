@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import thumbUp from '../../assets/thumb-up.svg';
 import thumbDown from '../../assets/thumb-down.svg';
 import {
@@ -17,32 +17,56 @@ import {
   VoteButton
 } from './vote-card.Styled';
 import { ThumbButton } from './thumb-button';
+import { Candidate, VoteType } from '../../domains/voting/entities';
 
 interface VoteCardProps {
-  cardCandidate: string
+  candidate: Candidate
 }
 
-export const VoteCard: FunctionComponent<VoteCardProps> = ({cardCandidate}) => {
+const calculatePercentage = (total: number, portion: number): number => {
+  return Math.round(portion*100/total);
+}
+
+const thumbRule = (upVotes: number, downVotes: number): VoteType => {
+  return (upVotes >= downVotes ? VoteType.UP: VoteType.DOWN);
+}
+
+export const VoteCard: FunctionComponent<VoteCardProps> = ({candidate}) => {
+
+  const upPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.upVotes);
+  const downPercentage = calculatePercentage(candidate.upVotes + candidate.downVotes, candidate.downVotes);
+  const [upVotePercentage, setUpVotePercentage] = useState<number>(upPercentage);
+  const [downVotePercentage, setDownVotePercentage] = useState<number>(downPercentage);
   return (
-    <CardContainer cardImage={cardCandidate}>
+    <CardContainer cardImage={candidate.image}>
       <VoteCardContainer>
 
-        <CandidateName><ThumbButton type='UP'/> Kanye West</CandidateName>
-        <Published><Strong>1 month ago</Strong> in Entertainment</Published>
-        <Description>Vestibulum diam ante, porttitor a odio eget, rhoncus neque. Aenean eu velit libero.</Description>
+        <CandidateName>
+          <ThumbButton type={thumbRule(upVotePercentage, downVotePercentage)}/> 
+          {candidate.name}
+        </CandidateName>
+        <Published>
+          <Strong>
+            {candidate.published} 
+          </Strong> 
+           in {candidate.section}
+        </Published>
+        <Description>
+          {candidate.message}
+        </Description>
         <VoteActions>
-          <ThumbButton type='UP'/>
-          <ThumbButton type='DOWN'/>
+          <ThumbButton type={VoteType.UP}/>
+          <ThumbButton type={VoteType.DOWN}/>
           <VoteButton>Vote now</VoteButton>
         </VoteActions>
         <VotePercentage>
-          <ThumbUp percentage={50}>
+          <ThumbUp percentage={upVotePercentage}>
             <IconThumb src={thumbUp} />
-            50
+            {upVotePercentage}
             <Percentage>%</Percentage>
           </ThumbUp>
-          <ThumbDown percentage={50}>
-            50
+          <ThumbDown percentage={downVotePercentage}>
+            {downVotePercentage}
             <Percentage>%</Percentage> 
             <IconThumb src={thumbDown} />
           </ThumbDown>

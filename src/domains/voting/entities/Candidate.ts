@@ -6,4 +6,5 @@ export interface Candidate {
   published: string;
   upVotes: number;
   downVotes: number;
+  image: string;
 }

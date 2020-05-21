@@ -45,6 +45,7 @@ export const Description = styled.p`
 
 export const Strong = styled.strong`
   font-weight: 700;
+  margin-right: 4px;
 `;
 
 export const VoteActions = styled.div`

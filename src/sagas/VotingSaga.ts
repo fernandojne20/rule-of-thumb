@@ -16,3 +16,4 @@ function* getCandidatesSaga() {
   const candidates: Candidate[] = yield call(getCandidates);
   yield put<SetCandidatesAction>({type: VOTING_ACTIONS.SET_CANDIDATES, candidates: candidates});
 }
+

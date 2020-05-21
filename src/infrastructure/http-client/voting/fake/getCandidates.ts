@@ -15,6 +15,7 @@ export const CANDIDATES: Candidate[] = [
     published: '1 month ago',
     upVotes: 2,
     downVotes: 4,
+    image: 'Kanye.png'
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ export const CANDIDATES: Candidate[] = [
     published: '1 month ago',
     upVotes: 10,
     downVotes: 4,
+    image: 'Mark.png'
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ export const CANDIDATES: Candidate[] = [
     published: '1 month ago',
     upVotes: 40,
     downVotes: 100,
+    image: 'Cristina.png'
   },
   {
     id: 4,
@@ -42,5 +45,6 @@ export const CANDIDATES: Candidate[] = [
     published: '1 month ago',
     upVotes: 1000,
     downVotes: 50,
+    image: 'Malala.png'
   }
 ];
