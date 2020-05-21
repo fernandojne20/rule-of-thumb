@@ -3,6 +3,7 @@ import './App.css';
 import { Header } from './components/shared/header';
 import { Banner } from './components/banner';
 import { Candidates } from './components/candidates';
+import { Footer } from './components/shared/footer';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Header/>
       <Banner/>
       <Candidates/>
+      <Footer/>
     </>
   );
 }
