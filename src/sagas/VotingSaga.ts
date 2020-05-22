@@ -5,24 +5,26 @@ import {successGetCandidates, successMakeVote} from '../infrastructure/http-clie
 import { Candidate, MakeVoteDTO } from '../domains/voting/entities';
 import { StatusResponse } from '../infrastructure/http-client/entities';
 
-//To use Fake request uncomment
-// const getCandidates = Voting.getCandidates(successGetCandidates);
+export const ACTIONS = [
+  takeLatest(VOTING_ACTIONS.GET_CANDIDATES, getCandidatesSaga),
+  takeLatest(VOTING_ACTIONS.MAKE_VOTE, makeVoteSaga)
+];
 
-const getCandidates = Voting.getCandidates(Voting.getCandidatesAccesor());
 export function* votingSaga() {
-
-  yield all([
-    takeLatest(VOTING_ACTIONS.GET_CANDIDATES, getCandidatesSaga),
-    takeLatest(VOTING_ACTIONS.MAKE_VOTE, makeVoteSaga)
-  ]);
+  yield all(ACTIONS);
 }
 
-function* getCandidatesSaga() {
+export function* getCandidatesSaga() {
+
+  //To use Fake request uncomment
+  // const getCandidates = Voting.getCandidates(successGetCandidates);
+
+  const getCandidates = Voting.getCandidates(Voting.getCandidatesAccesor());
   const candidates: Candidate[] = yield call(getCandidates);
   yield put<SetCandidatesAction>({type: VOTING_ACTIONS.SET_CANDIDATES, candidates: candidates});
 }
 
-function* makeVoteSaga(args: MakeVoteAction) {
+export function* makeVoteSaga(args: MakeVoteAction) {
 
   const {id, voteType}: MakeVoteDTO = args;
 
